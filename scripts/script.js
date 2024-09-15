@@ -15,48 +15,80 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        humanScore++;
-        computerScore++;
         console.log(`Tie! You both chose ${humanChoice}`);
-        return;
+        return 'tie';
     }
 
     switch (humanChoice) {
         case 'rock':
             if (computerChoice == 'paper') {
-                computerScore++;
                 console.log("You lose! Paper beats Rock");
+                return 'computer';
             } else {
-                humanScore++;
                 console.log("You win! Rock beats Scissors");
+                return 'human';
             }
-            break;
         case 'paper':
             if (computerChoice == 'scissors') {
-                computerScore++;
                 console.log("You lose! Scissors beats Paper");
+                return 'computer';
             } else {
-                humanScore++;
                 console.log("You win! Paper beats Rock");
+                return 'human';
             }
-            break;
         case 'scissors':
             if (computerChoice == 'rock') {
-                computerScore++;
                 console.log("You lose! Rock beats Scissors");
+                return 'computer';
             } else {
-                humanScore++;
                 console.log("You win! scissors beats paper");
+                return 'human';
             }
     }
 }
 
-// Declare the players score variables
-let humanScore = 0;
-let computerScore = 0;
+// Declaring the winner
+function declareWinner(humanScore, computerScore) {
+    const result = `${humanScore}-${computerScore}`;
+    if (humanScore > computerScore) {
+        console.log(`You win! with a result of ${result}`);
+    } else if (humanScore < computerScore) {
+        console.log(`You lose :( with a result of ${result}`)
+    } else {
+        console.log(`It's a Tie! with a result of ${result}`)
+    }
+}
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+// Write the logic to play the entire game
+function playgame() {
+    // Declare the players global score variables
+    let humanScore = 0;
+    let computerScore = 0;
 
-playRound(humanSelection, computerSelection);
+    const totalRoundsPlayed = 5;
+    let roundCount = 0;
+
+    while (roundCount < totalRoundsPlayed) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        winner = playRound(humanSelection, computerSelection);
+
+        if (winner === 'tie') {
+            humanScore++;
+            computerScore++;
+            roundCount++;
+            continue;
+        }
+
+        winner == 'human' ? humanScore++ : computerScore++;
+
+        roundCount++;
+    }
+
+    declareWinner(humanScore, computerScore);
+}
+
+// Start game
+playgame();
+
 
