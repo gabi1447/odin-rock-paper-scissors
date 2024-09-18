@@ -59,36 +59,4 @@ function declareWinner(humanScore, computerScore) {
     }
 }
 
-// Write the logic to play the entire game
-function playgame() {
-    // Declare the players global score variables
-    let humanScore = 0;
-    let computerScore = 0;
-
-    const totalRoundsPlayed = 5;
-    let roundCount = 0;
-
-    while (roundCount < totalRoundsPlayed) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        winner = playRound(humanSelection, computerSelection);
-
-        if (winner === 'tie') {
-            humanScore++;
-            computerScore++;
-            roundCount++;
-            continue;
-        }
-
-        winner == 'human' ? humanScore++ : computerScore++;
-
-        roundCount++;
-    }
-
-    declareWinner(humanScore, computerScore);
-}
-
-// Start game
-playgame();
-
 
