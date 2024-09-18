@@ -45,21 +45,52 @@ function playRound(humanChoice, computerChoice) {
 function declareWinner(humanScore, computerScore) {
     const result = `${humanScore}-${computerScore}`;
     if (humanScore > computerScore) {
-        console.log(`You win! with a result of ${result}`);
+        resultMsg.style.color = 'green';
+        resultMsg.textContent = `You win! with a result of ${result}`;
     } else if (humanScore < computerScore) {
-        console.log(`You lose :( with a result of ${result}`)
+        resultMsg.style.color = 'red';
+        resultMsg.textContent = `You lose :( with a result of ${result}`;
     } else {
-        console.log(`It's a Tie! with a result of ${result}`)
+        resultMsg.style.color = 'blue';
+        resultMsg.textContent = `It's a Tie! with a result of ${result}`;
     }
 }
 
 const choices = document.querySelector(".choices");
 const resultMsg = document.querySelector("#resultMsg");
+const score = document.querySelector(".score");
+
+let humanScore = 0;
+let computerScore = 0;
+
+function addScore(roundWinner) {
+    if (roundWinner === 'tie') {
+        humanScore++;
+        computerScore++;
+    } else if (roundWinner == 'computer') {
+        computerScore++;
+    } else {
+        humanScore++;
+    }
+}
 
 choices.addEventListener("click", event => {
+    if (humanScore === 0 || computerScore === 0) {
+        resultMsg.style.color = 'black';
+    }
+
     const computerSelection = getComputerChoice();
     const humanSelection = event.target.textContent.toLowerCase();
-    playRound(humanSelection, computerSelection);
+    let roundWinner = playRound(humanSelection, computerSelection);
+
+    addScore(roundWinner);
+    score.textContent = `You: ${humanScore} - Computer: ${computerScore}`;
+
+    if (humanScore === 5 || computerScore === 5) {
+        declareWinner(humanScore, computerScore);
+        humanScore = 0;
+        computerScore = 0;
+    }
 })
 
 
