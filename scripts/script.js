@@ -59,4 +59,12 @@ function declareWinner(humanScore, computerScore) {
     }
 }
 
+const choices = document.querySelector(".choices");
+
+choices.addEventListener("click", event => {
+    const computerSelection = getComputerChoice();
+    const humanSelection = event.target.textContent.toLowerCase();
+    playRound(humanSelection, computerSelection);
+})
+
 
