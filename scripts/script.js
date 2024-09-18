@@ -63,6 +63,8 @@ const score = document.querySelector(".score");
 let humanScore = 0;
 let computerScore = 0;
 
+score.textContent = `You: ${humanScore} - Computer: ${computerScore}`;
+
 function addScore(roundWinner) {
     if (roundWinner === 'tie') {
         humanScore++;
