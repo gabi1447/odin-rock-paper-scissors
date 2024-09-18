@@ -7,12 +7,6 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
-// Write the logic to get the human choice
-function getHumanChoice() {
-    const humanChoice = prompt("Choose between rock, paper or scissors: ");
-    return humanChoice.toLowerCase();
-}
-
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         resultMsg.textContent = `Tie! You both chose ${humanChoice}`;
